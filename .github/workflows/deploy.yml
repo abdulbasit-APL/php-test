@@ -1,39 +1,24 @@
-name: Deploy to DigitalOcean
-
+name: Build & Deploy
 on:
   push:
-    branches:
-      - main # Change this to your main branch name
+    branches: [main]
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Use Node.js 16
-        uses: actions/setup-node@v2
+      - name: Deploy PHP app
+        - uses: actions/checkout@v4
+          with:
+            sparse-checkout: |
+              php-app
+              backup.sh
+        uses: appleboy/ssh-action@v1.0.0
         with:
-          node-version: 16
-          
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Install SSH key
-        run: |
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -H 128.199.14.142 >> ~/.ssh/known_hosts
-          chmod 644 ~/.ssh/known_hosts
-
-      - name: Backup existing files
-        run: |
-          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa user@your-droplet-ip-address "sudo mv /usr/local/src/php /usr/local/src/php_backup"
-          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa user@your-droplet-ip-address "sudo mkdir -p /usr/local/src/php"
-
-      - name: Deploy to DigitalOcean
-        run: |
-          scp -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa -r php-app/* user@your-droplet-ip-address:/usr/local/src/php/
-
-      - name: Cleanup backup (optional)
-        run: |
-          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa user@your-droplet-ip-address "sudo ls -al /usr/local/src/php_backup"
+          host: ${{secrets.SSH_HOST}} # IP address of the server you wish to ssh into
+          key: ${{secrets.SSH_KEY}} # Private or public key of the server
+          username: ${{ secrets.SSH_USERNAME }} # User of the server you want to ssh into
+     
+          script: |
+            whoami
+            ls -al
