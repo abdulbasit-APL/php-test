@@ -18,11 +18,7 @@ jobs:
           pwd
           ls -al php-app
           ls -al backup.sh
-      - name: Backup existing files
-        run: |
-          whoami
-          ssh -i "${{secrets.SSH_KEY}}" "${{secrets.SSH_USERNAME}}@${{secrets.SSH_HOST}}" "sudo cp -rf /usr/local/src/php /usr/local/src/php_backup"
-          #ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_ed25519 ${{secrets.SSH_USERNAME}}@${{secrets.SSH_HOST}} "sudo mv /usr/local/src/php /usr/local/src/php_backup"
+      
       - name: Deploy php-app
         uses: appleboy/ssh-action@v1.0.0
         with:
@@ -33,6 +29,7 @@ jobs:
             cd /usr/local/src/
             mkdir test
             cd test
-            git checkout main
+            git clone git@github.com:abdulbasit-APL/php-test.git
+            #git clone git@github.com:Mulubwa17/ci-cd-to-digitalocean-with-github-actions.git 
             touch abj.txt
             ls -al /usr/local/src/test
