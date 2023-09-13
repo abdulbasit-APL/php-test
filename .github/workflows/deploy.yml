@@ -1,4 +1,4 @@
-name: Build & Deploy
+name: PHP deployment on DO Droplet
 on:
   push:
     branches: [main]
@@ -34,3 +34,11 @@ jobs:
             git clone git@github.com:abdulbasit-APL/php-test.git
             #touch abj.txt
             ls -al /usr/local/src/test/php-test
+            cd /usr/local/src/php-test
+            chmod +x backup.sh
+            echo "Taking Backup of the Existing Application"
+            /usr/local/src/test/php-test/backup.sh
+            echo "Deployment got succeeded. Please Validate"
+            rsync -avz php-app/ /usr/local/src/php/
+            echo "Listing the deployed files"
+            ls -al /usr/local/src/php/
