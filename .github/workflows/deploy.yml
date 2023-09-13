@@ -31,11 +31,16 @@ jobs:
             mkdir test
             ls -al /usr/local/src/test
             cd test
-            git clone --no-checkout https://github.com/abdulbasit-APL/php-test.git
+            git clone --depth 1 --branch main --no-checkout https://github.com/abdulbasit-APL/php-test.git
             cd php-test
-            git sparse-checkout init --cone
-            git sparse-checkout set php-test backup.sh
-            git checkout @
+            git sparse-checkout set php-test
+            git checkout main
+            
+            #git clone --no-checkout https://github.com/abdulbasit-APL/php-test.git
+            #cd php-test
+            #git sparse-checkout init --cone
+            #git sparse-checkout set php-test backup.sh
+            #git checkout @
             #git clone git@github.com:abdulbasit-APL/php-test.git
             #touch abj.txt
             ls -al /usr/local/src/test/php-test
