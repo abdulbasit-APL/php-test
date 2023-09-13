@@ -25,6 +25,7 @@ jobs:
           username: ${{secrets.SSH_USERNAME}} # User of the server you want to ssh into
           script: |
             pwd
+            ${{ github.workspace }}
             ls -al
             chmod +x backup.sh
             ./backup.sh
