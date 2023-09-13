@@ -31,7 +31,7 @@ jobs:
             mkdir test
             ls -al /usr/local/src/test
             cd test
-            git clone --depth 1 --branch main --filter=backup.sh:php-test https://github.com/username/repo.git
+            git clone --depth 1 --branch main --filter=php-test https://github.com/username/repo.git
             #git clone --depth 1 --branch main --no-checkout https://github.com/abdulbasit-APL/php-test.git
             #cd php-test
             #git sparse-checkout set php-test
