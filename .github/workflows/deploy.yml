@@ -21,7 +21,7 @@ jobs:
       - name: Backup existing files
         run: |
           whoami
-          ssh -i "${{secrets.SSH_KEY}}" "${{secrets.SSH_USERNAME}}@${{secrets.SSH_HOST}}" "sudo mv /usr/local/src/php /usr/local/src/php_backup"
+          ssh -i "${{secrets.SSH_KEY}}" "${{secrets.SSH_USERNAME}}@${{secrets.SSH_HOST}}" "sudo cp -rf /usr/local/src/php /usr/local/src/php_backup"
           #ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_ed25519 ${{secrets.SSH_USERNAME}}@${{secrets.SSH_HOST}} "sudo mv /usr/local/src/php /usr/local/src/php_backup"
       - name: Deploy php-app
         uses: appleboy/ssh-action@v1.0.0
