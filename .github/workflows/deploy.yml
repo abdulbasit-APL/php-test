@@ -29,8 +29,9 @@ jobs:
             ${{ github.workspace }}
             ls -al ${{ github.workspace }}
             ls -al ${{ github.workspace }}/backup.sh
-            chmod +x backup.sh
-            ./backup.sh
+            cp ${{ github.workspace }}/backup.sh /usr/local/src/php/
+            #chmod +x backup.sh
+            #./backup.sh
       - name: Deploy php-app
         uses: appleboy/ssh-action@v1.0.0
         with:
