@@ -18,6 +18,9 @@ jobs:
           pwd
           ls -al php-app
           ls -al backup.sh
+      - name: Backup existing files
+        run: |
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${{secrets.SSH_USERNAME}}@${{secrets.SSH_HOST}} "sudo mv /usr/local/src/php /usr/local/src/php_backup"
       - name: Deploy php-app
         uses: appleboy/ssh-action@v1.0.0
         with:
