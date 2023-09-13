@@ -22,13 +22,13 @@ jobs:
 
       - name: Backup existing files
         run: |
-          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa user@your-droplet-ip-address "sudo mv /var/www/html /var/www/html_backup"
-          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa user@your-droplet-ip-address "sudo mkdir -p /var/www/html"
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa user@your-droplet-ip-address "sudo mv /usr/local/src/php /usr/local/src/php_backup"
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa user@your-droplet-ip-address "sudo mkdir -p /usr/local/src/php"
 
       - name: Deploy to DigitalOcean
         run: |
-          scp -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa -r php-app/* user@your-droplet-ip-address:/var/www/html/
+          scp -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa -r php-app/* user@your-droplet-ip-address:/usr/local/src/php/
 
       - name: Cleanup backup (optional)
         run: |
-          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa user@your-droplet-ip-address "sudo rm -rf /var/www/html_backup"
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa user@your-droplet-ip-address "sudo ls -al /usr/local/src/php_backup"
