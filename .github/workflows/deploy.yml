@@ -1,0 +1,34 @@
+name: Deploy to DigitalOcean
+
+on:
+  push:
+    branches:
+      - main # Change this to your main branch name
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install SSH key
+        run: |
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H your-droplet-ip-address >> ~/.ssh/known_hosts
+          chmod 644 ~/.ssh/known_hosts
+
+      - name: Backup existing files
+        run: |
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa user@your-droplet-ip-address "sudo mv /var/www/html /var/www/html_backup"
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa user@your-droplet-ip-address "sudo mkdir -p /var/www/html"
+
+      - name: Deploy to DigitalOcean
+        run: |
+          scp -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa -r php-app/* user@your-droplet-ip-address:/var/www/html/
+
+      - name: Cleanup backup (optional)
+        run: |
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa user@your-droplet-ip-address "sudo rm -rf /var/www/html_backup"
