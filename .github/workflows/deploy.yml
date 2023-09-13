@@ -15,6 +15,7 @@ jobs:
             backup.sh
       - name: List Checked Out Folders
         run: |
+          pwd
           ls -al php-app
           ls -al backup.sh
       - name: Execute backup.sh
