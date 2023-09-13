@@ -27,5 +27,7 @@ jobs:
           script: |
             cd /usr/local/src/
             mkdir test
+            cd test
+            git fetch origin master
             touch abj.txt
-            ls -al /usr/local/src/
+            ls -al /usr/local/src/test
