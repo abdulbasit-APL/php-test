@@ -34,7 +34,7 @@ jobs:
             git clone git@github.com:abdulbasit-APL/php-test.git
             #touch abj.txt
             ls -al /usr/local/src/test/php-test
-            cd /usr/local/src/php-test
+            cd /usr/local/src/test/php-test
             sudo chmod +x backup.sh
             echo "Taking Backup of the Existing Application"
             sudo /usr/local/src/test/php-test/backup.sh
