@@ -22,7 +22,7 @@ jobs:
         run: |
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -H your-droplet-ip-address >> ~/.ssh/known_hosts
+          ssh-keyscan -H 128.199.14.142 >> ~/.ssh/known_hosts
           chmod 644 ~/.ssh/known_hosts
 
       - name: Backup existing files
