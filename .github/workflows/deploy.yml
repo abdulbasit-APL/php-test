@@ -28,6 +28,6 @@ jobs:
             cd /usr/local/src/
             mkdir test
             cd test
-            git fetch origin main
+            git checkout main
             touch abj.txt
             ls -al /usr/local/src/test
