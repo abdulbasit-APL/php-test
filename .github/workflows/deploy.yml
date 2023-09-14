@@ -4,7 +4,7 @@ on:
     branches: [main]
 
 jobs:
-  deploy:
+  PHP deployment on DO:
     runs-on: ubuntu-latest
     steps:
       - name: Code CheckOut
@@ -38,7 +38,7 @@ jobs:
             sudo chmod +x backup.sh
             echo "Taking Backup of the Existing Application"
             sudo /usr/local/src/test/php-test/backup.sh
-            echo "Deployment got succeeded. Please Validate"
+            echo 'Deployment successful to digital ocean'
             sudo rsync -avz /usr/local/src/test/php-test/php-app/ /usr/local/src/php/
             echo "Listing the deployed files"
             ls -al /usr/local/src/php/
