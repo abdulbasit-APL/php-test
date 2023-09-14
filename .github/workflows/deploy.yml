@@ -4,7 +4,7 @@ on:
     branches: [main]
 
 jobs:
-  PHP deployment on DO:
+  PHP_deployment_on_DO:
     runs-on: ubuntu-latest
     steps:
       - name: Code CheckOut
